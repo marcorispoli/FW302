@@ -1,0 +1,7 @@
+**/.generated_files
+*.cof
+*.o
+*.d
+*.err
+*.lst
+**/html
