@@ -262,6 +262,7 @@
       </logicalFolder>
       <itemPath>Makefile</itemPath>
       <itemPath>../src/config/default/harmony-manifest-success.yml</itemPath>
+      <itemPath>FW302.mc3</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
