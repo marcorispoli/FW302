@@ -5,3 +5,8 @@
 *.err
 *.lst
 **/html
+firmware/doc/html/**
+firmware/FW302.X/build/**
+firmware/FW302.X/debug/**
+firmware/FW302.X/dist/**
+firmware/FW302.X/.generated_files/**
