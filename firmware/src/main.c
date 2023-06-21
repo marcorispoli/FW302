@@ -28,7 +28,6 @@
 #include "definitions.h"                // SYS function prototypes
 #include "application.h"
 #include "Protocol/protocol.h"
-#include "BusHardware/bushw.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -44,6 +43,7 @@ static uint8_t trigger_time = 0;
 
 static void rtcEventHandler (RTC_TIMER32_INT_MASK intCause, uintptr_t context)
 {
+    
     // Periodic Interval Handler: Freq = 1024 / 2 ^ (n+3)
     
     if (intCause & RTC_TIMER32_INT_MASK_PER0) trigger_time |= _7820_us_TriggerTime;  // 7.82ms Interrupt
@@ -58,20 +58,17 @@ int main ( void )
     /* Initialize all modules */
     SYS_Initialize ( NULL );
     
-  
     // Registers the RTC interrupt routine to the RTC module
     RTC_Timer32CallbackRegister(rtcEventHandler, 0);
     RTC_Timer32Start(); // Start the RTC module
             
-    // Start the TCo to start the Vitality LED
-    TC0_CompareStart();
+    // Start the TCo to start the Vitality LED    
+    
     
     // Application Protocol initialization
     ApplicationProtocolInit();
     
-    // Initializes the Bus Hardware signals
-    BusHwInit(); // Call AFTER the ApplicationProtocolInit();
-    
+ 
     
     while ( true )
     {
@@ -81,26 +78,25 @@ int main ( void )
         // Protocol management
         ApplicationProtocolLoop();
         
-        
+           
         // Timer events activated into the RTC interrupt
         if(trigger_time & _7820_us_TriggerTime){
             trigger_time &=~ _7820_us_TriggerTime;
-            BusHwLoop(); // Bus Hardware Management                
-            
+       
         }
 
         if(trigger_time & _15_64_ms_TriggerTime){
             trigger_time &=~ _15_64_ms_TriggerTime;
-            
+       
         }
         
         
                 
         if(trigger_time & _1024_ms_TriggerTime){
             trigger_time &=~ _1024_ms_TriggerTime;
-             
-            VITALITY_LED_Toggle();
             
+            // VITALITY_LED_Toggle();
+       
         }        
      
 
@@ -112,8 +108,4 @@ int main ( void )
     return ( EXIT_FAILURE );
 }
 
-
-/*******************************************************************************
- End of File
-*/
 
