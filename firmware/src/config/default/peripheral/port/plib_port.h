@@ -65,13 +65,22 @@
 // *****************************************************************************
 // *****************************************************************************
 
-/*** Macros for uc_CAN_TX0 pin ***/
-#define uc_CAN_TX0_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 22U)) & 0x01U)
-#define uc_CAN_TX0_PIN                  PORT_PIN_PA22
+/*** Macros for ACTIVITY pin ***/
+#define ACTIVITY_Set()               (PORT_REGS->GROUP[0].PORT_OUTSET = ((uint32_t)1U << 17U))
+#define ACTIVITY_Clear()             (PORT_REGS->GROUP[0].PORT_OUTCLR = ((uint32_t)1U << 17U))
+#define ACTIVITY_Toggle()            (PORT_REGS->GROUP[0].PORT_OUTTGL = ((uint32_t)1U << 17U))
+#define ACTIVITY_OutputEnable()      (PORT_REGS->GROUP[0].PORT_DIRSET = ((uint32_t)1U << 17U))
+#define ACTIVITY_InputEnable()       (PORT_REGS->GROUP[0].PORT_DIRCLR = ((uint32_t)1U << 17U))
+#define ACTIVITY_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 17U)) & 0x01U)
+#define ACTIVITY_PIN                  PORT_PIN_PA17
 
-/*** Macros for uc_CAN_RX0 pin ***/
-#define uc_CAN_RX0_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 23U)) & 0x01U)
-#define uc_CAN_RX0_PIN                  PORT_PIN_PA23
+/*** Macros for CAN0_TX pin ***/
+#define CAN0_TX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 24U)) & 0x01U)
+#define CAN0_TX_PIN                  PORT_PIN_PA24
+
+/*** Macros for CAN0_RX pin ***/
+#define CAN0_RX_Get()               (((PORT_REGS->GROUP[0].PORT_IN >> 25U)) & 0x01U)
+#define CAN0_RX_PIN                  PORT_PIN_PA25
 
 // *****************************************************************************
 /* PORT Group
